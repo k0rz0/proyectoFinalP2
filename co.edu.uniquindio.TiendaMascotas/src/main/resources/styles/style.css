@@ -1,0 +1,19 @@
+#anchorPaneLogin {
+    -fx-background-color: #f0f0f0; /* Color de fondo */
+}
+
+#lbTituloLogin {
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+    -fx-start-margin: 50px;
+}
+
+#btnIniciarSecion {
+    -fx-background-color: #4caf50; /* Color de fondo del botón */
+    -fx-text-fill: white; /* Color del texto del botón */
+    -fx-font-weight: bold;
+    /*-fx-padding: 10px 20px;*/
+    -fx-border-radius: 5px;
+    -fx-cursor: hand;
+}
+

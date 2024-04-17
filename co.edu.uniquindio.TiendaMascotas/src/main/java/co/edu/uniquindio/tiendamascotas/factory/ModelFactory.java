@@ -71,4 +71,8 @@ public class ModelFactory {
     public boolean eliminarMascota(Mascota mascota) {
         return tiendaMascota.eliminarMascota(mascota);
     }
+
+    public List<Mascota> obtenerMascotasPorEdad(String edad) { return tiendaMascota.obtenerMascotasPorEdad(edad); }
+
+    public List<Mascota> obtenerMascotasPorRaza(String raza) { return tiendaMascota.obtenerMascotasPorRaza(raza);}
 }

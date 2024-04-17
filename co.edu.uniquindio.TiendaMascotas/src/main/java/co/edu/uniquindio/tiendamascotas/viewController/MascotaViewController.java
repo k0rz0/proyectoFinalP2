@@ -132,6 +132,18 @@ public class MascotaViewController {
     @FXML
     private TextField txtRazaMascota;
 
+    @FXML
+    private Button btnFiltroEdad;
+
+    @FXML
+    private Button btnFiltroRaza;
+
+    @FXML
+    private TextField txtFiltroEdad;
+
+    @FXML
+    private TextField txtFiltroRaza;
+
 
     private void limpiarCamposEmpleado() {
         txtRazaMascota.setText("");
@@ -234,5 +246,26 @@ public class MascotaViewController {
         }
     }
 
+    @FXML
+    void onFiltroEdad(ActionEvent event) {
+        if (!txtFiltroEdad.getText().equalsIgnoreCase("")){
+            listaMascotas.clear();
+            listaMascotas.addAll(mascotaController.obtenerMascotasPorEdad(txtFiltroEdad.getText()));
+        }else{
+            obtenerMascotas();
+            mostrarMensaje("Notificación Mascota", "Campo Vacio", "Los datos ingresados no son validos", Alert.AlertType.ERROR);
+        }
+    }
+
+    @FXML
+    void onFiltroRaza(ActionEvent event) {
+        if (!txtFiltroRaza.getText().equalsIgnoreCase("")){
+            listaMascotas.clear();
+            listaMascotas.addAll(mascotaController.obtenerMascotasPorRaza(txtFiltroRaza.getText()));
+        }else{
+            obtenerMascotas();
+            mostrarMensaje("Notificación Mascota", "Campo Vacio", "Los datos ingresados no son validos", Alert.AlertType.ERROR);
+        }
+    }
 
 }

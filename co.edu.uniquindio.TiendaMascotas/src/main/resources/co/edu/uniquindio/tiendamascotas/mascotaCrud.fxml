@@ -9,8 +9,8 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="596.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.tiendamascotas.viewController.MascotaViewController">
-    <TableView fx:id="tableMascotas" layoutX="43.0" layoutY="337.0" prefHeight="200.0" prefWidth="514.0">
+<AnchorPane prefHeight="714.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.tiendamascotas.viewController.MascotaViewController">
+    <TableView fx:id="tableMascotas" layoutX="51.0" layoutY="467.0" prefHeight="200.0" prefWidth="514.0">
         <columns>
             <TableColumn fx:id="colCodigo" prefWidth="63.0" text="Código" />
             <TableColumn fx:id="colNombre" prefWidth="154.0" text="Nombre" />
@@ -19,11 +19,11 @@
          <TableColumn fx:id="colEdad" minWidth="0.0" prefWidth="50.0" text="Edad" />
         </columns>
     </TableView>
-    <Button fx:id="btnEliminarMascota" layoutX="242.0" layoutY="557.0" mnemonicParsing="false" onAction="#onEliminarMascota" text="Eliminar Mascota" />
-   <Label layoutX="168.0" layoutY="64.0" text="Nombre:" />
-   <Label layoutX="186.0" layoutY="111.0" text="Tipo:" />
-   <Label layoutX="184.0" layoutY="158.0" text="Raza:" />
-   <Label layoutX="183.0" layoutY="205.0" text="Edad:" />
+    <Button fx:id="btnEliminarMascota" layoutX="249.0" layoutY="675.0" mnemonicParsing="false" onAction="#onEliminarMascota" text="Eliminar Mascota" />
+   <Label layoutX="204.0" layoutY="65.0" text="Nombre:" />
+   <Label layoutX="222.0" layoutY="112.0" text="Tipo:" />
+   <Label layoutX="220.0" layoutY="159.0" text="Raza:" />
+   <Label layoutX="219.0" layoutY="206.0" text="Edad:" />
    <TextField fx:id="txtNombreMascota" layoutX="251.0" layoutY="60.0" />
    <TextField fx:id="txtRazaMascota" layoutX="252.0" layoutY="154.0" />
    <TextField fx:id="txtEdadMascota" layoutX="252.0" layoutY="201.0" />
@@ -32,7 +32,15 @@
    <Separator layoutX="12.0" layoutY="286.0" prefHeight="3.0" prefWidth="563.0" />
    <Label layoutX="268.0" layoutY="24.0" prefHeight="17.0" prefWidth="65.0" text="MASCOTA" />
    <Button fx:id="btnActualizarMascota" layoutX="308.0" layoutY="299.0" mnemonicParsing="false" onAction="#onActualizarMascota" text="Actualizar Mascota" />
-   <Label layoutX="170.0" layoutY="250.0" text="Código:" />
+   <Label layoutX="206.0" layoutY="251.0" text="Código:" />
    <TextField fx:id="txtCodigoMascota" layoutX="252.0" layoutY="246.0" />
    <ComboBox fx:id="cbTipoMascota" layoutX="251.0" layoutY="107.0" prefWidth="150.0" />
+   <Label layoutX="91.0" layoutY="361.0" text="Raza:" />
+   <TextField fx:id="txtFiltroRaza" layoutX="120.0" layoutY="357.0" />
+   <TextField fx:id="txtFiltroEdad" layoutX="376.0" layoutY="357.0" />
+   <Label layoutX="308.0" layoutY="361.0" text="Mayores de:" />
+   <Button fx:id="btnFiltroRaza" layoutX="148.0" layoutY="395.0" mnemonicParsing="false" onAction="#onFiltroRaza" text="Filtrar por raza" />
+   <Button fx:id="btnFiltroEdad" layoutX="376.0" layoutY="395.0" mnemonicParsing="false" onAction="#onFiltroEdad" text="Filtrar por edad" />
+   <Separator layoutX="21.0" layoutY="334.0" prefHeight="3.0" prefWidth="563.0" />
+   <Separator layoutX="37.0" layoutY="444.0" prefHeight="3.0" prefWidth="563.0" />
 </AnchorPane>

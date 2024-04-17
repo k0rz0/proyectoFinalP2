@@ -75,4 +75,29 @@ public class TiendaMascota {
             return  false;
         }
     }
+
+    public List<Mascota> obtenerMascotasPorEdad(String edad) {
+        List<Mascota> listaMascotasPorEdad = new ArrayList<>();
+
+        for (Mascota mascota: getListaMascotas()) {
+            if(mascota.getEdad() > Integer.parseInt(edad)){
+                listaMascotasPorEdad.add(mascota);
+            }
+        }
+
+        return listaMascotasPorEdad;
+    }
+
+    public List<Mascota> obtenerMascotasPorRaza(String raza) {
+        List<Mascota> listaMascotasPorRaza = new ArrayList<>();
+
+        for (Mascota mascota: getListaMascotas()) {
+            if(mascota.getRaza().equalsIgnoreCase(raza)){
+                listaMascotasPorRaza.add(mascota);
+            }
+        }
+
+        return listaMascotasPorRaza;
+
+    }
 }

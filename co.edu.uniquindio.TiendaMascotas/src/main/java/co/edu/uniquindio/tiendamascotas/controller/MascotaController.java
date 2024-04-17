@@ -32,4 +32,12 @@ public class MascotaController {
     public boolean eliminarMascota(Mascota mascota) {
         return modelFactory.eliminarMascota(mascota);
     }
+
+    public List<Mascota> obtenerMascotasPorEdad(String edad) {
+        return modelFactory.obtenerMascotasPorEdad(edad);
+    }
+
+    public List<Mascota> obtenerMascotasPorRaza(String raza) {
+        return modelFactory.obtenerMascotasPorRaza(raza);
+    }
 }

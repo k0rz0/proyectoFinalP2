@@ -11,4 +11,6 @@ module co.edu.uniquindio.tiendamascotas.tiendamascotas {
 
     opens co.edu.uniquindio.tiendamascotas.model;
     exports co.edu.uniquindio.tiendamascotas.model;
+    exports co.edu.uniquindio.tiendamascotas.model.productos;
+    opens co.edu.uniquindio.tiendamascotas.model.productos;
 }

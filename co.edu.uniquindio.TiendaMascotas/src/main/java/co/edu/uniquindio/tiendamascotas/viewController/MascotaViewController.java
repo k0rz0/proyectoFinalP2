@@ -4,12 +4,14 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import co.edu.uniquindio.tiendamascotas.controller.MascotaController;
-import co.edu.uniquindio.tiendamascotas.model.Mascota;
+import co.edu.uniquindio.tiendamascotas.model.productos.Mascota;
 import co.edu.uniquindio.tiendamascotas.model.enums.TipoMascota;
 import javafx.beans.property.ReadOnlyStringWrapper;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -27,8 +29,7 @@ public class MascotaViewController {
 
         initCombo();
         initTableMascota();
-
-
+        initSearch();
 
     }
 
@@ -39,15 +40,35 @@ public class MascotaViewController {
         tableMascotas.getItems().clear();
         tableMascotas.setItems(listaMascotas);
         listenerSelection();
-
     }
 
     private void initDataBinding() {
-        colCodigo.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getIdMascota()));
+        colCodigo.setCellValueFactory(cellData -> new SimpleStringProperty(Integer.toString(cellData.getValue().getIdProducto())));
         colNombre.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getNombre()));
         colTipo.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getTipoMascota().toString()));
         colRaza.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getRaza()));
         colEdad.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(Integer.toString(cellData.getValue().getEdad())));
+    }
+    private void initSearch(){
+        FilteredList<Mascota> filteredData = new FilteredList<>(listaMascotas, b->true);
+        txtbuscar.textProperty().addListener((ObservableList,oldValue,newValue)->{
+            filteredData.setPredicate(mascotaSeleccionada ->{
+                if (newValue == null || newValue.isEmpty()) {
+                    return true;
+                }
+                String loweCaseFilter = newValue.toLowerCase();
+                if (mascotaSeleccionada.getNombre().toLowerCase().contains(loweCaseFilter)) {
+                    return true;
+                } else if (mascotaSeleccionada.getRaza().toLowerCase().contains(loweCaseFilter)){
+                    return true;
+                }
+                return String.valueOf(mascotaSeleccionada.getIdProducto()).contains(loweCaseFilter);
+            });
+        });
+        SortedList<Mascota> sortedData = new SortedList<>(filteredData);
+
+        sortedData.comparatorProperty().bind(tableMascotas.comparatorProperty());
+        tableMascotas.setItems(sortedData);
     }
 
     private void obtenerMascotas() {
@@ -64,12 +85,9 @@ public class MascotaViewController {
 
     private void mostrarInformacionMascota(Mascota mascotaSeleccionada) {
         if(mascotaSeleccionada != null){
-
-            txtCodigoMascota.setText(mascotaSeleccionada.getIdMascota());
             txtNombreMascota.setText(mascotaSeleccionada.getNombre());
             txtRazaMascota.setText(mascotaSeleccionada.getRaza());
             txtEdadMascota.setText(String.valueOf(mascotaSeleccionada.getEdad()));
-
             cbTipoMascota.getSelectionModel().select(mascotaSeleccionada.getTipoMascota().toString());
 
         }
@@ -84,6 +102,104 @@ public class MascotaViewController {
 
     }
 
+
+
+
+    private void limpiarCampos() {
+        txtRazaMascota.setText("");
+        txtEdadMascota.setText("");
+        txtNombreMascota.setText("");
+        cbTipoMascota.getSelectionModel().select("--Seleccione--");
+    }
+
+    @FXML
+    void onLimpiar(ActionEvent event) {limpiarCampos();}
+    @FXML
+    void onClieanSearch(ActionEvent event) {
+        txtbuscar.setText("");
+    }
+    private boolean validarFormulario() {
+        return !txtNombreMascota.getText().isEmpty()
+                && !txtEdadMascota.getText().isEmpty()
+                && !txtRazaMascota.getText().isEmpty()
+                && !cbTipoMascota.getValue().equalsIgnoreCase("--Seleccione--");
+    }
+
+    private Mascota construirDatosMascota() {
+        return Mascota.builder()
+                .nombre(txtNombreMascota.getText())
+                .tipoMascota(TipoMascota.valueOf(cbTipoMascota.getValue().toUpperCase()))
+                .raza(txtRazaMascota.getText())
+                .edad(Integer.parseInt(txtEdadMascota.getText()))
+                .build();
+    }
+
+    private void mostrarMensaje(String titulo, String header, String contenido, Alert.AlertType alertType) {
+        Alert aler = new Alert(alertType);
+        aler.setTitle(titulo);
+        aler.setHeaderText(header);
+        aler.setContentText(contenido);
+        aler.showAndWait();
+    }
+
+
+    @FXML
+    void onActualizarMascota(ActionEvent event) {actualizarMascota();}
+
+    @FXML
+    void onAgregarMascota(ActionEvent event) {agregarMascota();}
+
+    @FXML
+    void onEliminarMascota(ActionEvent event) {eliminarMascota();}
+
+
+    private void agregarMascota() {
+        if(validarFormulario()){
+            Mascota mascota = construirDatosMascota();
+            if(mascotaController.crearMascota(mascota)){
+                obtenerMascotas();
+                mostrarMensaje("Notificación Mascota", "Mascota creado", "La Mascota se ha creado con éxito", Alert.AlertType.INFORMATION);
+                limpiarCampos();
+            }else{
+                mostrarMensaje("Notificación Mascota", "Mascota no creado", "La Mascota no se ha creado con éxito", Alert.AlertType.ERROR);
+            }
+        }else{
+            mostrarMensaje("Notificación Mascota", "Mascota no creado", "Los datos ingresados no son validos", Alert.AlertType.ERROR);
+        }
+    }
+
+
+
+    private void actualizarMascota() {
+        if(validarFormulario()){
+            Mascota mascota = construirDatosMascota();
+            if(mascotaController.actualizarMascota(mascota)){
+                obtenerMascotas();
+                mostrarMensaje("Notificación Mascota", "Mascota actualizada", "La Mascota se ha actualizado con éxito", Alert.AlertType.INFORMATION);
+                limpiarCampos();
+            }else{
+                mostrarMensaje("Notificación Mascota", "Mascota no actualizada", "La Mascota no se ha actualizado con éxito", Alert.AlertType.ERROR);
+            }
+        }else{
+            mostrarMensaje("Notificación Mascota", "Mascota no actualizada", "Los datos ingresados no son validos", Alert.AlertType.ERROR);
+        }
+    }
+
+    private void eliminarMascota() {
+        if(validarFormulario()){
+            Mascota mascota = construirDatosMascota();
+            if(mascotaController.eliminarMascota(mascota)){
+                obtenerMascotas();
+                mostrarMensaje("Notificación Mascota", "Mascota eliminada", "La Mascota se ha eliminado con éxito", Alert.AlertType.INFORMATION);
+                limpiarCampos();
+            }else{
+                mostrarMensaje("Notificación Mascota", "Mascota no eliminada", "La Mascota no se ha eliminado con éxito", Alert.AlertType.ERROR);
+            }
+        }else{
+            mostrarMensaje("Notificación Mascota", "Mascota no eliminada", "Los datos ingresados no son validos", Alert.AlertType.ERROR);
+        }
+    }
+    
     @FXML
     private ResourceBundle resources;
 
@@ -121,9 +237,6 @@ public class MascotaViewController {
     private TableView<Mascota> tableMascotas;
 
     @FXML
-    private TextField txtCodigoMascota;
-
-    @FXML
     private TextField txtEdadMascota;
 
     @FXML
@@ -132,107 +245,14 @@ public class MascotaViewController {
     @FXML
     private TextField txtRazaMascota;
 
-
-    private void limpiarCamposEmpleado() {
-        txtRazaMascota.setText("");
-        txtCodigoMascota.setText("");
-        txtEdadMascota.setText("");
-        txtNombreMascota.setText("");
-        cbTipoMascota.getSelectionModel().select("--Seleccione--");
-    }
-
-    private boolean validarFormulario() {
-        if(txtNombreMascota.getText().isEmpty()
-                || txtEdadMascota.getText().isEmpty()
-                || txtRazaMascota.getText().isEmpty()
-                || txtCodigoMascota.getText().isEmpty()
-                || cbTipoMascota.getValue().equalsIgnoreCase("--Seleccione--")){
-            return false;
-        }
-
-        return true;
-    }
-
-    private Mascota construirDatosMascota() {
-        return Mascota.builder()
-                .idMascota(txtCodigoMascota.getText())
-                .nombre(txtNombreMascota.getText())
-                .tipoMascota(TipoMascota.valueOf(cbTipoMascota.getValue().toUpperCase()))
-                .raza(txtRazaMascota.getText())
-                .edad(Integer.parseInt(txtEdadMascota.getText()))
-                .build();
-    }
-
-    private void mostrarMensaje(String titulo, String header, String contenido, Alert.AlertType alertType) {
-        Alert aler = new Alert(alertType);
-        aler.setTitle(titulo);
-        aler.setHeaderText(header);
-        aler.setContentText(contenido);
-        aler.showAndWait();
-    }
-
+    @FXML
+    private Button btnLimpiar;
 
     @FXML
-    void onActualizarMascota(ActionEvent event) {
-        actualizarMascota();
-    }
+    private TextField txtbuscar;
 
     @FXML
-    void onAgregarMascota(ActionEvent event) {
-        agregarMascota();
-    }
-
-    @FXML
-    void onEliminarMascota(ActionEvent event) {
-        eliminarMascota();
-    }
-
-    private void agregarMascota() {
-        if(validarFormulario()){
-            Mascota mascota = construirDatosMascota();
-            if(mascotaController.crearMascota(mascota)){
-                obtenerMascotas();
-                mostrarMensaje("Notificación Mascota", "Mascota creado", "La Mascota se ha creado con éxito", Alert.AlertType.INFORMATION);
-                limpiarCamposEmpleado();
-            }else{
-                mostrarMensaje("Notificación Mascota", "Mascota no creado", "La Mascota no se ha creado con éxito", Alert.AlertType.ERROR);
-            }
-        }else{
-            mostrarMensaje("Notificación Mascota", "Mascota no creado", "Los datos ingresados no son validos", Alert.AlertType.ERROR);
-        }
-    }
-
-
-
-    private void actualizarMascota() {
-        if(validarFormulario()){
-            Mascota mascota = construirDatosMascota();
-            if(mascotaController.actualizarMascota(mascota)){
-                obtenerMascotas();
-                mostrarMensaje("Notificación Mascota", "Mascota actualizada", "La Mascota se ha actualizado con éxito", Alert.AlertType.INFORMATION);
-                limpiarCamposEmpleado();
-            }else{
-                mostrarMensaje("Notificación Mascota", "Mascota no actualizada", "La Mascota no se ha actualizado con éxito", Alert.AlertType.ERROR);
-            }
-        }else{
-            mostrarMensaje("Notificación Mascota", "Mascota no actualizada", "Los datos ingresados no son validos", Alert.AlertType.ERROR);
-        }
-    }
-
-    private void eliminarMascota() {
-        if(validarFormulario()){
-            Mascota mascota = construirDatosMascota();
-            if(mascotaController.eliminarMascota(mascota)){
-                obtenerMascotas();
-                mostrarMensaje("Notificación Mascota", "Mascota eliminada", "La Mascota se ha eliminado con éxito", Alert.AlertType.INFORMATION);
-                limpiarCamposEmpleado();
-            }else{
-                mostrarMensaje("Notificación Mascota", "Mascota no eliminada", "La Mascota no se ha eliminado con éxito", Alert.AlertType.ERROR);
-            }
-        }else{
-            mostrarMensaje("Notificación Mascota", "Mascota no eliminada", "Los datos ingresados no son validos", Alert.AlertType.ERROR);
-        }
-    }
+    private Button btnCleanSearch;
 
 
 }

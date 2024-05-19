@@ -1,20 +1,13 @@
-package co.edu.uniquindio.tiendamascotas.model.builder;
+package co.edu.uniquindio.tiendamascotas.model.builder.Productos;
 
-import co.edu.uniquindio.tiendamascotas.model.Mascota;
+import co.edu.uniquindio.tiendamascotas.model.builder.ProductoBuilder;
+import co.edu.uniquindio.tiendamascotas.model.productos.Mascota;
 import co.edu.uniquindio.tiendamascotas.model.enums.TipoMascota;
 
-public class MascotaBuilder {
-
-    protected String nombre;
+public class MascotaBuilder extends ProductoBuilder<MascotaBuilder> {
     protected String raza;
     protected int edad;
     protected TipoMascota tipoMascota;
-    protected String idMascota;
-
-    public MascotaBuilder nombre(String nombre) {
-        this.nombre = nombre;
-        return this;
-    }
 
     public MascotaBuilder raza(String raza) {
         this.raza = raza;
@@ -29,13 +22,13 @@ public class MascotaBuilder {
         this.tipoMascota = tipoMascota;
         return this;
     }
-    public MascotaBuilder idMascota(String idMascota) {
-        this.idMascota = idMascota;
+    @Override
+    protected MascotaBuilder self() {
         return this;
     }
 
     public Mascota build() {
-        return new Mascota(nombre, raza, edad, tipoMascota, idMascota);
+        return new Mascota(cantidad,disponible,valor,nombre,raza,edad,tipoMascota);
     }
 
 }

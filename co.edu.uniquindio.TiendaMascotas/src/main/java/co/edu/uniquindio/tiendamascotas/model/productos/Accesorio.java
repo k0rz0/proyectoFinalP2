@@ -1,6 +1,5 @@
 package co.edu.uniquindio.tiendamascotas.model.productos;
 
-import co.edu.uniquindio.tiendamascotas.model.Producto;
 import co.edu.uniquindio.tiendamascotas.model.builder.Productos.AccesorioBuilder;
 import co.edu.uniquindio.tiendamascotas.model.enums.TipoMascota;
 

@@ -78,8 +78,8 @@ public class MascotaViewController {
 
     private void listenerSelection() {
         tableMascotas.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
-        mascotaSeleccionada = newSelection;
-        mostrarInformacionMascota(mascotaSeleccionada);
+            mascotaSeleccionada = newSelection;
+            mostrarInformacionMascota(mascotaSeleccionada);
         });
     }
 
@@ -115,7 +115,7 @@ public class MascotaViewController {
     @FXML
     void onLimpiar(ActionEvent event) {limpiarCampos();}
     @FXML
-    void onClieanSearch(ActionEvent event) {
+    void onCleanSearch(ActionEvent event) {
         txtbuscar.setText("");
     }
     private boolean validarFormulario() {
@@ -173,6 +173,7 @@ public class MascotaViewController {
     private void actualizarMascota() {
         if(validarFormulario()){
             Mascota mascota = construirDatosMascota();
+            mascota.setIdProducto(mascotaSeleccionada.getIdProducto());
             if(mascotaController.actualizarMascota(mascota)){
                 obtenerMascotas();
                 mostrarMensaje("Notificación Mascota", "Mascota actualizada", "La Mascota se ha actualizado con éxito", Alert.AlertType.INFORMATION);
@@ -188,6 +189,7 @@ public class MascotaViewController {
     private void eliminarMascota() {
         if(validarFormulario()){
             Mascota mascota = construirDatosMascota();
+            mascota.setIdProducto(mascotaSeleccionada.getIdProducto());
             if(mascotaController.eliminarMascota(mascota)){
                 obtenerMascotas();
                 mostrarMensaje("Notificación Mascota", "Mascota eliminada", "La Mascota se ha eliminado con éxito", Alert.AlertType.INFORMATION);

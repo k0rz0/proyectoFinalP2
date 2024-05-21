@@ -1,4 +1,4 @@
-package co.edu.uniquindio.tiendamascotas.model;
+package co.edu.uniquindio.tiendamascotas.model.productos;
 
 public abstract class Producto {
     private int idProducto = 0;
@@ -19,6 +19,10 @@ public abstract class Producto {
     //Get
     public int getIdProducto() {
         return idProducto;
+    }
+
+    public void setIdProducto(int idProducto) {
+        this.idProducto = idProducto;
     }
 
     public String getNombre() {

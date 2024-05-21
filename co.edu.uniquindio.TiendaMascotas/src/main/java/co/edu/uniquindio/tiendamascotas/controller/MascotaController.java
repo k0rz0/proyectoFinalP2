@@ -2,7 +2,7 @@ package co.edu.uniquindio.tiendamascotas.controller;
 
 import co.edu.uniquindio.tiendamascotas.factory.ModelFactory;
 import co.edu.uniquindio.tiendamascotas.model.productos.Mascota;
-import co.edu.uniquindio.tiendamascotas.model.Producto;
+import co.edu.uniquindio.tiendamascotas.model.productos.Producto;
 
 import java.util.ArrayList;
 import java.util.List;

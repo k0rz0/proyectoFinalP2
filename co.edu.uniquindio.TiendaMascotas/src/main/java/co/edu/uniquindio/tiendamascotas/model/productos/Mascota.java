@@ -1,6 +1,5 @@
 package co.edu.uniquindio.tiendamascotas.model.productos;
 
-import co.edu.uniquindio.tiendamascotas.model.Producto;
 import co.edu.uniquindio.tiendamascotas.model.builder.Productos.MascotaBuilder;
 import co.edu.uniquindio.tiendamascotas.model.enums.TipoMascota;
 
@@ -11,8 +10,6 @@ public class Mascota extends Producto {
     private TipoMascota tipoMascota;
 
     //Constructor
-
-
     public Mascota(int cantidad, boolean disponible, Double valor, String nombre, String raza, int edad, TipoMascota tipoMascota) {
         super(nombre, cantidad, disponible, valor);
         this.raza = raza;

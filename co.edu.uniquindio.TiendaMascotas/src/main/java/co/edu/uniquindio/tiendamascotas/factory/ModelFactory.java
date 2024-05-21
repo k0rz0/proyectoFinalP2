@@ -1,8 +1,10 @@
 package co.edu.uniquindio.tiendamascotas.factory;
+import co.edu.uniquindio.tiendamascotas.model.empelados.Empleado;
+import co.edu.uniquindio.tiendamascotas.model.empelados.Vendedor;
 import co.edu.uniquindio.tiendamascotas.model.productos.Accesorio;
 import co.edu.uniquindio.tiendamascotas.model.productos.Alimento;
 import co.edu.uniquindio.tiendamascotas.model.productos.Mascota;
-import co.edu.uniquindio.tiendamascotas.model.Producto;
+import co.edu.uniquindio.tiendamascotas.model.productos.Producto;
 import co.edu.uniquindio.tiendamascotas.model.TiendaMascota;
 import co.edu.uniquindio.tiendamascotas.model.enums.TipoMascota;
 
@@ -24,7 +26,6 @@ public class ModelFactory {
         }
         return modelFactory;
     }
-
     private void inicializarDatos() {
 
         /*Creacion de Propietarios*/
@@ -84,18 +85,76 @@ public class ModelFactory {
                 .cantidad(4)
                 .build();
 
-        System.out.println(tiendaMascota.agregarProducto(mascota1));
-        System.out.println( tiendaMascota.agregarProducto(mascota2));
-        System.out.println(tiendaMascota.agregarProducto(mascota3));
-        System.out.println(tiendaMascota.agregarProducto(accesorio3));
-        System.out.println(tiendaMascota.agregarProducto(accesorio2));
-        System.out.println(tiendaMascota.agregarProducto(alimento1));
+        tiendaMascota.agregarProducto(mascota1);
+        tiendaMascota.agregarProducto(mascota2);
+        tiendaMascota.agregarProducto(mascota3);
+        tiendaMascota.agregarProducto(accesorio3);
+        tiendaMascota.agregarProducto(accesorio2);
+        tiendaMascota.agregarProducto(alimento1);
+
+        /*Creacion de Empleados*/
+
+        Vendedor vendedor1 = Vendedor.builder()
+                .cedula("12")
+                .nombre("Jaime")
+                .apellido("Garcia")
+                .cargo("Vendedor")
+                .edad("35")
+                .build();
+
+        Vendedor vendedor2 = Vendedor.builder()
+                .cedula("13")
+                .nombre("Norbey")
+                .apellido("Casas")
+                .cargo("Vendedor")
+                .edad("50")
+                .build();
+
+
+        Vendedor vendedor3 = Vendedor.builder()
+                .cedula("14")
+                .nombre("Tom")
+                .apellido("Talavera")
+                .cargo("Vendedor")
+                .edad("18")
+                .build();
+
+        Vendedor vendedor4 = Vendedor.builder()
+                .cedula("15")
+                .nombre("ALL")
+                .apellido("Song")
+                .cargo("Vendedor")
+                .edad("21")
+                .build();
+
+        tiendaMascota.getListaEmpleados().add(vendedor1);
+        tiendaMascota.getListaEmpleados().add(vendedor2);
+        tiendaMascota.getListaEmpleados().add(vendedor3);
+        tiendaMascota.getListaEmpleados().add(vendedor4);
 
     }
+
+    /*Productos*/
     public Map<String, List<Producto>> obtenerProductos() { return tiendaMascota.obtenerProductos(); }
     public List<Producto> obtenerProductosPorTipo(String tipoProducto) { return tiendaMascota.obtenerProductosPorTipo(tipoProducto); }
     public boolean crearProducto(Producto producto) { return tiendaMascota.agregarProducto(producto); }
     public boolean actualizarProducto(Producto producto) { return tiendaMascota.actualizarProducto(producto); }
     public boolean eliminarProducto(Producto producto) {return tiendaMascota.eliminarProducto(producto);}
 
+    /*Empleados*/
+    public List<Empleado> obtenerEmpleados() {
+        return tiendaMascota.getListaEmpleados();
+    }
+
+    public boolean agregarEmpleado(Empleado empleado) {
+        return tiendaMascota.agregarEmpleado(empleado);
+    }
+
+    public boolean actualizarEmpleado(Empleado empleado, String cedulaAntigua) {
+        return tiendaMascota.actualizarEmpleado(empleado, cedulaAntigua);
+    }
+
+    public boolean eliminarEmpleado(String cedula) {
+        return tiendaMascota.eliminarEmpleado(cedula);
+    }
 }

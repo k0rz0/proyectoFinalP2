@@ -4,7 +4,7 @@
     -primary: white;
     -secondary: #e8e8e8;
     -tertiary: black;
-    -tertiary-armed: #F8084;
+    -tertiary-armed: #FF8084;
 }
 .background-pane{
     -fx-background-color: -bg-gradient;
@@ -57,7 +57,7 @@
    -fx-background-color:  linear-gradient(white,#e8e8e8);
    -fx-background-radius: 5px;
 }
-//table
+/*table*/
 .table-view,
 .table-view .column-header,
 .table-view .column-header-background .filler,
@@ -72,6 +72,7 @@
 .table-view .table-cell{
     -fx-border-color: transparent;
     -fx-padding: 2 0 2 10px;
+    -fx-alignment: CENTER;
 }
 
 .table-row-cell:hover {
@@ -91,13 +92,13 @@
     -fx-padding: 0.0em;
 }
 
-.table-row-cell: highlighted {
+.table-row-cell:hover {
     -fx-background-color: -primary;
     -fx-background-radius: 5px;
     -fx-background-insets: 2px;
 }
 
-.table-row-cell: selected {
+.table-row-cell:selected {
     -fx-background-color: -tertiary;
     -fx-text-background-color: white;
     -fx-background-radius: 5px;

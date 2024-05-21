@@ -1,6 +1,5 @@
 package co.edu.uniquindio.tiendamascotas.model.builder.Productos;
 
-import co.edu.uniquindio.tiendamascotas.model.builder.ProductoBuilder;
 import co.edu.uniquindio.tiendamascotas.model.productos.Alimento;
 
 public class AlimentoBuilder extends ProductoBuilder<AlimentoBuilder> {

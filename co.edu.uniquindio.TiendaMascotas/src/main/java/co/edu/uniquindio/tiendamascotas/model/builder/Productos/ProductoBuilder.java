@@ -1,4 +1,4 @@
-package co.edu.uniquindio.tiendamascotas.model.builder;
+package co.edu.uniquindio.tiendamascotas.model.builder.Productos;
 
 public class    ProductoBuilder<T extends ProductoBuilder<T>> {
     protected String nombre;
@@ -22,8 +22,6 @@ public class    ProductoBuilder<T extends ProductoBuilder<T>> {
         this.cantidad = cantidad;
         return self();
     }
-
-
 
     @SuppressWarnings("unchecked")
     protected T self() {

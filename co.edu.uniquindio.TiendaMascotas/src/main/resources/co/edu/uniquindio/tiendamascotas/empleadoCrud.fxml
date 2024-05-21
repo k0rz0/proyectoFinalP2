@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="596.0" prefWidth="600.0" styleClass="background-pane" stylesheets="@../../../../styles/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.tiendamascotas.viewController.EmpleadoViewController">
+    <TableView fx:id="tableEmpleados" layoutX="48.0" layoutY="245.0" prefHeight="286.0" prefWidth="514.0">
+        <columns>
+            <TableColumn fx:id="colCedula" prefWidth="84.0" text="Cédula" />
+            <TableColumn fx:id="colNombre" prefWidth="133.0" text="Nombre" />
+            <TableColumn fx:id="colApellido" prefWidth="93.0" text="Apellido" />
+            <TableColumn fx:id="colCargo" minWidth="0.0" prefWidth="153.0" text="Cargo" />
+            <TableColumn fx:id="colEdad" minWidth="0.0" prefWidth="50.0" text="Edad" />
+        </columns>
+    </TableView>
+   <Separator layoutX="1.0" layoutY="55.0" prefHeight="3.0" prefWidth="600.0" />
+   <Separator layoutX="1.0" layoutY="160.0" prefHeight="3.0" prefWidth="600.0" />
+   <Separator layoutX="1.0" layoutY="201.0" prefHeight="3.0" prefWidth="600.0" />
+   <Label layoutX="248.0" layoutY="14.0" text="EMPLEADO">
+      <font>
+         <Font name="Arial Bold" size="20.0" />
+      </font>
+   </Label>
+   <GridPane layoutX="14.0" layoutY="55.0" prefHeight="107.0" prefWidth="561.0">
+     <columnConstraints>
+       <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="30.0" />
+         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+         <ColumnConstraints hgrow="SOMETIMES" minWidth="1.0" prefWidth="1.0" />
+       <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="30.0" />
+         <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+     </columnConstraints>
+     <rowConstraints>
+         <RowConstraints minHeight="10.0" prefHeight="60.0" vgrow="SOMETIMES" />
+       <RowConstraints minHeight="10.0" prefHeight="60.0" vgrow="SOMETIMES" />
+         <RowConstraints minHeight="10.0" prefHeight="60.0" vgrow="SOMETIMES" />
+     </rowConstraints>
+      <children>
+         <Label text="Nombre:" GridPane.rowIndex="1" />
+         <TextField fx:id="txtNombreEmpleado" styleClass="highlight-rectangle" stylesheets="@../../../../styles/style.css" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+         <Label text="Apellido:" GridPane.rowIndex="2" />
+         <TextField fx:id="txtApellidoEmpleado" styleClass="highlight-rectangle" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+         <Label text="Edad:" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+         <TextField fx:id="txtEdadEmpleado" styleClass="highlight-rectangle" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+         <TextField fx:id="txtCedulaEmpleado" styleClass="highlight-rectangle" stylesheets="@../../../../styles/style.css" GridPane.columnIndex="1" />
+         <Label text="Cedula:" textAlignment="RIGHT" />
+         <Label text="Cargo:" GridPane.columnIndex="3" />
+         <TextField fx:id="txtCargoEmpleado" styleClass="highlight-rectangle" GridPane.columnIndex="4" />
+      </children>
+   </GridPane>
+   <HBox alignment="CENTER" layoutX="1.0" layoutY="161.0" prefHeight="40.0" prefWidth="600.0" spacing="20.0">
+      <children>
+         <Button fx:id="btnAgregarEmpleado" mnemonicParsing="false" onAction="#onAgregarEmpleado" styleClass="highlight-rectangle" text="Agregar Empleado" />
+         <Button fx:id="btnActualizarEmpleado" mnemonicParsing="false" onAction="#onActualizarEmpleado" styleClass="highlight-rectangle" text="Actualizar Empleado" />
+          <Button fx:id="btnEliminarEmpleado" mnemonicParsing="false" onAction="#onEliminarEmpleado" styleClass="highlight-rectangle" text="Eliminar Empleado" />
+         <Button fx:id="btnLimpiar" mnemonicParsing="false" onAction="#onLimpiar" styleClass="highlight-rectangle" text="Limpiar" />
+      </children>
+   </HBox>
+   <StackPane layoutX="43.0" layoutY="212.0" prefHeight="25.0" prefWidth="514.0" styleClass="highlight-rectangle" stylesheets="@../../../../styles/style.css">
+      <children>
+         <TextField fx:id="txtbuscarEmpleado" promptText="Search" styleClass="search-textField" stylesheets="@../../../../styles/style.css">
+            <StackPane.margin>
+               <Insets left="17.0" right="16.0" />
+            </StackPane.margin>
+         </TextField>
+         <Button maxWidth="-Infinity" mnemonicParsing="false" stylesheets="@../../../../styles/style.css" StackPane.alignment="CENTER_LEFT">
+            <StackPane.margin>
+               <Insets left="9.0" />
+            </StackPane.margin>
+            <styleClass>
+               <String fx:value="searh-button" />
+               <String fx:value="btn-textField" />
+            </styleClass>
+         </Button>
+         <Button fx:id="btnCleanSearch" mnemonicParsing="false" onAction="#onCleanSearch" stylesheets="@../../../../styles/style.css" StackPane.alignment="CENTER_RIGHT">
+            <styleClass>
+               <String fx:value="btn-textField" />
+               <String fx:value="clean-btn" />
+            </styleClass>
+            <StackPane.margin>
+               <Insets right="5.0" />
+            </StackPane.margin>
+         </Button>
+      </children>
+   </StackPane>
+</AnchorPane>

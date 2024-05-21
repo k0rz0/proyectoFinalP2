@@ -10,7 +10,7 @@ import java.io.IOException;
 public class TiendaMascotasApp extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(TiendaMascotasApp.class.getResource("mascotaCrud.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(TiendaMascotasApp.class.getResource("empleadoCrud.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
 
         // Vincular el archivo CSS

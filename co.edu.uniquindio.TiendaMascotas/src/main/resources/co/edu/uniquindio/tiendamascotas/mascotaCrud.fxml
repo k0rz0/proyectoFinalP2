@@ -82,7 +82,7 @@
                <String fx:value="btn-textField" />
             </styleClass>
          </Button>
-         <Button fx:id="btnCleanSearch" mnemonicParsing="false" onAction="#onClieanSearch" stylesheets="@../../../../styles/style.css" StackPane.alignment="CENTER_RIGHT">
+         <Button fx:id="btnCleanSearch" mnemonicParsing="false" onAction="#onCleanSearch" stylesheets="@../../../../styles/style.css" StackPane.alignment="CENTER_RIGHT">
             <styleClass>
                <String fx:value="btn-textField" />
                <String fx:value="clean-btn" />

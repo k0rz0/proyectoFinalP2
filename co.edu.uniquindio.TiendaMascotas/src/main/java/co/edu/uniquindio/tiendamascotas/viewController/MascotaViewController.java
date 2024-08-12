@@ -24,13 +24,10 @@ public class MascotaViewController {
 
     @FXML
     void initialize() {
-
         mascotaController =  new MascotaController();
-
         initCombo();
         initTableMascota();
         initSearch();
-
     }
 
     private void initTableMascota() {

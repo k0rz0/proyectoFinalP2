@@ -135,7 +135,7 @@ public class EmpleadoViewController {
             Empleado empleado = construirDatosEmpleado();
             if(empleadoController.agregarEmpleado(empleado)){
                 obtenerEmpleados();
-                mostrarMensaje("Notificación Empleado", "Empleado creado", "El Empleado se ha creado con éxito", Alert.AlertType.INFORMATION);
+                mostrarMensaje("Notificación Empleadoa", "Empleado creado", "El Empleado se ha creado con éxito", Alert.AlertType.INFORMATION);
                 limpiarCampos();
             }else{
                 mostrarMensaje("Notificación Empleado", "Empleado no creado", "El Empleado no se ha creado con éxito", Alert.AlertType.ERROR);
